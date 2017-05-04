@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 4, 2017 6:33:18 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.Tim3.Model.Event" table="EVENT">
+        <id name="event_id" type="int" access="field">
+            <column name="EVENT_ID" />
+            <generator class="increment" />
+        </id>
+        <property name="owner_id" type="int" access="field">
+            <column name="OWNER_ID" />
+        </property>
+        <property name="voteDeadline" type="java.util.Date">
+            <column name="VOTE_DEADLINE" />
+        </property>
+        <property name="reported" type="boolean">
+            <column name="REPORTED" />
+        </property>
+        <property name="removed" type="boolean">
+            <column name="REMOVED" />
+        </property>
+    </class>
+</hibernate-mapping>

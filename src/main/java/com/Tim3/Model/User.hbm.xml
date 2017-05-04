@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 4, 2017 6:33:18 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.Tim3.Model.User" table="USER">
+        <id name="uid" type="int" access="field">
+            <column name="UID" />
+            <generator class="increment" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="lastName" type="java.lang.String">
+            <column name="LAST_NAME" />
+        </property>
+        <property name="eMail" type="java.lang.String" access="field">
+            <column name="E_MAIL" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <property name="reported" type="boolean">
+            <column name="REPORTED" />
+        </property>
+        <property name="removed" type="boolean">
+            <column name="REMOVED" />
+        </property>
+        <property name="role" type="boolean">
+            <column name="ROLE" />
+        </property>
+    </class>
+</hibernate-mapping>
