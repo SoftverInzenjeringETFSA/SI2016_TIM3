@@ -1,3 +1,10 @@
-com\tim3\dogovor_za_izlazak\config\WebConfig.class
 com\tim3\dogovor_za_izlazak\controller\MainController.class
 com\tim3\dogovor_za_izlazak\WebAppInitializer.class
+com\tim3\dogovor_za_izlazak\entity\Option.class
+com\tim3\dogovor_za_izlazak\config\WebConfig.class
+com\tim3\dogovor_za_izlazak\entity\User.class
+com\tim3\dogovor_za_izlazak\entity\Message.class
+com\tim3\dogovor_za_izlazak\entity\Detail.class
+com\tim3\dogovor_za_izlazak\entity\ReportedEvents.class
+com\tim3\dogovor_za_izlazak\entity\ReportedUsers.class
+com\tim3\dogovor_za_izlazak\entity\Event.class
