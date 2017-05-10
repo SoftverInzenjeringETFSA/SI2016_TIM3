@@ -1,13 +1,14 @@
 var app=angular.module('app', [
-    'ngMaterial',
+    'ngMaterial'/*
     'ngRoute',
     'ngResource',
     'ngMessages',
-    'ngAria'
+    'ngAria'*/
 ]);
-app.config(function($routeProvider){
+
+/*app.config(function($routeProvider){
     $routeProvider
         .otherwise(
             { redirectTo: '/'}
         );
-});
+});*/
