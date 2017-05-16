@@ -2,7 +2,7 @@
 ## Dogovor za izlazak
 
 ### Pre-requisites:
- 
+ //TODO EDITOVATI OVO
 #### 1. IntelliJ Idea Ultimate
 
 #### 2. apache-tomcat-9.0.0.M20
