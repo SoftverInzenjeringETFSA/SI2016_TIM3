@@ -29,8 +29,8 @@ public class User implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)     
-	@Column(name="id")
-	private Integer id;
+	@Column(name="idUsera")
+	private Integer idUsera;
 	
 	//Povezivanja sa ostalim tabelama, tj. UserAndEvents, Message, PrijavljeniKorisnici, UserDetailsOptions
 	
@@ -50,23 +50,35 @@ public class User implements Serializable {
 	@JoinColumn(name="idUsera")
 	private List<UserDetailsOptions> userDetailsOptions;
 	
-
+	@Column(name="name")    //@NotNull ako bude trebalo moze
 	private String name;
+	
+	@Column(name="lastName")
 	private String lastName;
+	
+	@Column(name="email")
 	private String email;
+	
+	@Column(name="password")
 	private String password;
+	
+	@Column(name="reported")
 	private Boolean reported;
+	
+	@Column(name="removed")
 	private Boolean removed;
+	
+	@Column(name="role")
 	private Boolean role;
 	
 	public User(){
 		//Treba nekad
 	}
 	public Integer getId() {
-		return id;
+		return idUsera;
 	}
 	public void setId(Integer id) {
-		this.id = id;
+		this.idUsera = id;
 	}
 	
 	public String getName() {
