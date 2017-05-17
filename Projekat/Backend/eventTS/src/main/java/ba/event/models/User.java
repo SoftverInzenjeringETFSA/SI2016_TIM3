@@ -27,6 +27,12 @@ import javax.persistence.Table;
 @Table(name="User")
 public class User implements Serializable {
 	
+	
+	//Univerzalni identifikator klase koja je serijalizirana
+	//Deserijalizacija koristi ovaj broj da osigura da podaci unutar klase adekvatno reaguju sa serijaliziranim objektom
+	//Ukoliko nema poklapanja baca se izuzetak: InvalidClassException
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)     
 	@Column(name="idUsera")

@@ -1,44 +1,62 @@
 package ba.event.models;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Message")
-public class Messages implements Serializable {
+@Table(name="Detail")
+public class Detail implements Serializable {
 	
 	//Univerzalni identifikator klase koja je serijalizirana
 	//Deserijalizacija koristi ovaj broj da osigura da podaci unutar klase adekvatno reaguju sa serijaliziranim objektom
 	//Ukoliko nema poklapanja baca se izuzetak: InvalidClassException
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne(targetEntity=User.class)
-	@JoinColumn(name="idUsera")
-	private User user;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)   
+	@Column(name="idDetail")
+	private Integer idDetail;
+	
+	@Column(name="detailName")
+	private String detailName;
+	
+	@Column(name="detailDescription")
+	private String detailDescription;
 	
 	@ManyToOne(targetEntity=Event.class)
 	@JoinColumn(name="idEventa")
 	private Event event;
-	
 
-	@Column(name="text")
-	private String text;
-	
-	@Column(name="time")
-	private Date date;
-	
-	public User getUser() {
-		return user;
+	public Integer getIdDetail() {
+		return idDetail;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setIdDetail(Integer idDetail) {
+		this.idDetail = idDetail;
+	}
+
+	public String getDetailName() {
+		return detailName;
+	}
+
+	public void setDetailName(String detailName) {
+		this.detailName = detailName;
+	}
+
+	public String getDetailDescription() {
+		return detailDescription;
+	}
+
+	public void setDetailDescription(String detailDescription) {
+		this.detailDescription = detailDescription;
 	}
 
 	public Event getEvent() {
@@ -47,22 +65,6 @@ public class Messages implements Serializable {
 
 	public void setEvent(Event event) {
 		this.event = event;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 	
 	//Ako ne bude radilo vidi ovo:
@@ -76,4 +78,5 @@ public class Messages implements Serializable {
 	 * 
 	 * 
 	 */
+	
 }

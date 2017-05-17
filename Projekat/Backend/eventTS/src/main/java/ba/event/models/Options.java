@@ -1,52 +1,43 @@
 package ba.event.models;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Message")
-public class Messages implements Serializable {
+@Table(name="Options")
+public class Options implements Serializable {
 	
 	//Univerzalni identifikator klase koja je serijalizirana
 	//Deserijalizacija koristi ovaj broj da osigura da podaci unutar klase adekvatno reaguju sa serijaliziranim objektom
 	//Ukoliko nema poklapanja baca se izuzetak: InvalidClassException
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne(targetEntity=User.class)
-	@JoinColumn(name="idUsera")
-	private User user;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)   
+	@Column(name="idOption")
+	private Integer idOption;
 	
-	@ManyToOne(targetEntity=Event.class)
-	@JoinColumn(name="idEventa")
-	private Event event;
-	
-
 	@Column(name="text")
 	private String text;
 	
-	@Column(name="time")
-	private Date date;
-	
-	public User getUser() {
-		return user;
+	@ManyToOne(targetEntity=Detail.class)
+	@JoinColumn(name="idDetail")
+	private Event ideDetail;
+
+	public Integer getIdOption() {
+		return idOption;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Event getEvent() {
-		return event;
-	}
-
-	public void setEvent(Event event) {
-		this.event = event;
+	public void setIdOption(Integer idOption) {
+		this.idOption = idOption;
 	}
 
 	public String getText() {
@@ -57,13 +48,15 @@ public class Messages implements Serializable {
 		this.text = text;
 	}
 
-	public Date getDate() {
-		return date;
+	public Event getIdeDetail() {
+		return ideDetail;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setIdeDetail(Event ideDetail) {
+		this.ideDetail = ideDetail;
 	}
+	
+	
 	
 	//Ako ne bude radilo vidi ovo:
 	/*	@Id
@@ -76,4 +69,5 @@ public class Messages implements Serializable {
 	 * 
 	 * 
 	 */
+
 }

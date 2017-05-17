@@ -17,6 +17,12 @@ import javax.persistence.Table;
 @Table(name="Event")
 public class Event implements Serializable {
 
+	
+	//Univerzalni identifikator klase koja je serijalizirana
+	//Deserijalizacija koristi ovaj broj da osigura da podaci unutar klase adekvatno reaguju sa serijaliziranim objektom
+	//Ukoliko nema poklapanja baca se izuzetak: InvalidClassException
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)   
 	@Column(name="idEventa")
@@ -31,6 +37,10 @@ public class Event implements Serializable {
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="idEventa")
 	private List<PrijavljeniEventi> prijavljeniEventi;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="idEventa")
+	private List<Detail> detail;
 	
 	public Event(){
 		
