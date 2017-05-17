@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700&subset=latin-ext');
+
+.navbar{
+    margin-bottom:0!important;
+}
+
+/* Jumbotron #s1 */
+.jumbotron{
+    height:auto;
+    margin-bottom:0;
+
+    background:url(https://images.pexels.com/photos/45922/pexels-photo-45922.jpeg?w=940&h=650&auto=compress&cs=tinysrgb);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height:420px;
+    position:relative;
+
+}
+
+.jumbotron .shadow{
+    position: absolute;
+    z-index:10;
+    top:0;bottom:0;right:0;left:0;
+
+    background: rgba(0,0,0,0.6);
+}
+
+.jumbotron .cover-content{
+    position: relative;
+    z-index:20;
+    color:#fefefe;
+    text-align: center;
+    padding:80px 0;
+}
+
+.jumbotron .cover-content h1{
+    font-family: 'Roboto Slab', serif;
+}
+
+.jumbotron .cover-content .see-more{
+    display: inline-block;
+    border:1px solid #fefefe;
+    padding:15px 30px;
+    font-size: 16px;
+    color:#fefefe;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.jumbotron .cover-content .see-more:hover{
+    text-decoration: none;
+    opacity: 0.5;
+}

@@ -1,14 +1,16 @@
 var app=angular.module('app', [
-    'ngMaterial'/*
-    'ngRoute',
+    'ngRoute'/*,
     'ngResource',
     'ngMessages',
     'ngAria'*/
 ]);
 
-/*app.config(function($routeProvider){
+app.config(function($routeProvider){
     $routeProvider
+        .when('/register', {
+            templateUrl : "resources/views/auth/register.html"
+        })
         .otherwise(
-            { redirectTo: '/'}
+            { templateUrl : "resources/views/home.html" }
         );
-});*/
+});
