@@ -53,19 +53,34 @@ public class UserDao {
 	        .setParameter("email", email)
 	        .uniqueResult();
 	  }
-	  private User getByMessages(List<Messages> messages){
 	  
-      /* List<Messages> list = getSession.createCriteria(User.class)  
-                  .add(Restrictions.eq("name", name))  
-                  .list(); */ 
-      return (User)getSession().createQuery("from User where messages.equals(messages)").
-    		  setParameter("messages",messages).uniqueResult();
+	  public User getBy(String lastname) { return (User) getSession().createQuery(
+		        "from User where lastname = :lastname")
+		        .setParameter("lastname", lastname)
+		        .uniqueResult();
+		
 	  }
+	  public User getByPassword(String password) { return (User) getSession().createQuery(
+		        "from User where password = :password")
+		        .setParameter("password",password)
+		        .uniqueResult();
+	 }
+	  public User getByRemoved(Boolean removed) {
+		    return (User) getSession().load(User.class, removed);
+		  }
 	  
-	 
+	  public User getByReported(Boolean reported) {
+		    return (User) getSession().load(User.class, reported);
+		  }
+	  public User getByRole(Boolean role) {
+		    return (User) getSession().load(User.class, role);
+		  } 
+	  
 	  public void update(User user) {
 	    getSession().update(user);
 	  }
-
+	 
 	}
-}
+}  /* List<Messages> list = getSession.createCriteria(User.class)  
+.add(Restrictions.eq("name", name))  
+.list(); */ 
