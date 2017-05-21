@@ -54,9 +54,14 @@ public class User implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="idUsera")
+	private List<PrijavljeniEventi> prijavljeniEventi;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="idUsera")
 	private List<UserDetailsOptions> userDetailsOptions;
 	
-	@Column(name="name")    //@NotNull ako bude trebalo moze
+	@NotNull
+	@Column(name="name")    
 	private String name;
 	
 	@Column(name="lastName")

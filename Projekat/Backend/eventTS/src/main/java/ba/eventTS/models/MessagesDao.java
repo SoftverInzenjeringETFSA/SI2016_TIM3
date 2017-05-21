@@ -31,6 +31,7 @@ public class MessagesDao {
 	  public List getAll() {
 	    return getSession().createQuery("from Messagges").list();
 	  }
+	  
 	  public User getById(Integer idUsera) {
 		    return (User) getSession().load(User.class, idUsera);
 		  }
@@ -43,7 +44,7 @@ public class MessagesDao {
 			        .uniqueResult();
 			  }
  
-	  public Messages getByMessages(Date date) {
+	  public Messages getByDate(Date date) {
 		  return (Messages) getSession().createQuery(
 			        "from Messages where date = :date")
 			        .setParameter("date", date)

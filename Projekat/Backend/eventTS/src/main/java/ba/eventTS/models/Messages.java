@@ -31,20 +31,17 @@ public class Messages implements Serializable {
 	@Column(name = "idUsera", unique = true, nullable = false)
 	private Integer idUsera;
 
-/*
 
 	@ManyToOne(targetEntity=Event.class)
 	@JoinColumn(name="idEventa")
 	private Event event;
-	*/
+
 
 	@Column(name="text")
 	private String text;
 	
 	@Column(name="time")
 	private Date date;
-	
-	
 	
 	public Integer getIdUsera() {
 		return idUsera;
@@ -61,14 +58,14 @@ public class Messages implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}*/
-/*
-	public Event getEvent() {
+
+	public Integer getEvent() {
 		return event;
 	}
 
-	public void setEvent(Event event) {
+	public void setIdEventa(Event event) {
 		this.event = event;
-	}*/
+	}
 
 	public String getText() {
 		return text;

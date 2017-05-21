@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name="Event")
@@ -34,6 +35,9 @@ public class Event implements Serializable {
 	@Column(name="removed")
 	private Boolean removed;
 	
+	@Column(name="voteDeadline")
+	private Date voteDeadline;
+	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="idEventa")
 	private List<PrijavljeniEventi> prijavljeniEventi;
@@ -41,6 +45,10 @@ public class Event implements Serializable {
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="idEventa")
 	private List<Detail> detail;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="idEventa")
+	private List<Messages> messages;
 	
 	public Event(){
 		
@@ -69,6 +77,14 @@ public class Event implements Serializable {
 		this.removed = removed;
 	}
 
+	public Date getVoteDeadline(){
+		return voteDeadline;
+	}
+	
+	public void setVoteDeadline(Date date) {
+		this.voteDeadline = date;
+	}
+	
 	public List<PrijavljeniEventi> getPrijavljeniEventi() {
 		return prijavljeniEventi;
 	}
