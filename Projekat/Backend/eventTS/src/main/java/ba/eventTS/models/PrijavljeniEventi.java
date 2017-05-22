@@ -28,11 +28,12 @@ public class PrijavljeniEventi implements Serializable {
 	@Column(name = "idUsera", unique = true, nullable = false)
 	private Integer idUsera;
 	
-	/*
+	
 	@ManyToOne(targetEntity=User.class)
 	@JoinColumn(name="idUsera")
 	private User user;
-	*/
+	
+	
 	@Column(name="opisPrijave")
 	private String opisPrijave;
 	
