@@ -1,7 +1,7 @@
 package com.controllers;
 
 import com.models.User;
-import com.sun.xml.internal.bind.v2.model.core.ID;
+//import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,8 @@ import com.repository.UserRepository;
  * Created by ohrinator on 5/22/17.
  */
 @Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:8000")
 @RequestMapping(path="/user")
 public class UserController {
     // Kreirati repozitoriji za objekat
