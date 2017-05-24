@@ -2,14 +2,10 @@ package com.models;
 
 import java.sql.Timestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import org.hibernate.annotations.Cascade;
 
 @Entity
 public class Message {
@@ -20,8 +16,8 @@ public class Message {
 	 
 	 private String text;
 	 private Timestamp time;
-	 private User user;
-	 private Event event;
+	 private Integer userID;
+	 private Integer eventID;
 
 	
 	public Integer getId() {
@@ -42,21 +38,19 @@ public class Message {
 	public void setTime(Timestamp time) {
 		this.time = time;
 	}
-	
-	@ManyToOne(cascade=CascadeType.ALL) 
-	public User getUser() {
-		return user;
+
+	public Integer getUserID() {
+		return userID;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserID(Integer user) {
+		this.userID = user;
 	}
-	
-	@ManyToOne(cascade=CascadeType.ALL) 
-	public Event getEvent() {
-		return event;
+
+	public Integer getEventID() {
+		return eventID;
 	}
-	public void setEvent(Event event) {
-		this.event = event;
+	public void setEventID(Integer event) {
+		this.eventID = event;
 	}
 
 }

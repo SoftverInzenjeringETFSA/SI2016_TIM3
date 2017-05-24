@@ -20,11 +20,14 @@ public class User {
     private boolean reported;
     private boolean removed;
     private String role;
+    private String authToken;
+
+    public String getAuthToken() { return authToken; }
+    public void setAuthToken(String authToken) { this.authToken = authToken; }
 
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -32,7 +35,6 @@ public class User {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -40,7 +42,6 @@ public class User {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -48,7 +49,6 @@ public class User {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -56,7 +56,6 @@ public class User {
     public boolean isReported() {
         return reported;
     }
-
     public void setReported(boolean reported) {
         this.reported = reported;
     }
@@ -64,7 +63,6 @@ public class User {
     public boolean isRemoved() {
         return removed;
     }
-
     public void setRemoved(boolean removed) {
         this.removed = removed;
     }
@@ -72,10 +70,8 @@ public class User {
     public String getRole() {
         return role;
     }
-
     public void setRole(String role) {
         this.role = role;
     }
-
 
 }

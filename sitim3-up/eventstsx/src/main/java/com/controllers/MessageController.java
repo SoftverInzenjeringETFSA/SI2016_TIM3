@@ -20,14 +20,14 @@ public class MessageController {
 	    MessageRepository messageRepository;
 
 	 @RequestMapping(path="/create", method = RequestMethod.POST)
-	    public @ResponseBody ResponseEntity addNewMessage (@RequestParam String text, @RequestParam User u, @RequestParam Event e) {
+	    public @ResponseBody ResponseEntity addNewMessage (@RequestParam String text, @RequestParam Integer u, @RequestParam Integer e) {
 	        // @ResponseBody means the returned String is the response, not a view name
 	        // @RequestParam means it is a parameter from the GET or POST request
 
 	        Message m =new Message();
 	        m.setText(text);
-	        m.setUser(u);
-	        m.setEvent(e);
+	        m.setUserID(u);
+	        m.setEventID(e);
 	        messageRepository.save(m);
 
 	        return new ResponseEntity<>(null, HttpStatus.OK);

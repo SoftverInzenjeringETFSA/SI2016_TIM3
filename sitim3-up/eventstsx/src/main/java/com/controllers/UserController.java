@@ -3,11 +3,19 @@ package com.controllers;
 import com.models.User;
 //import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import com.repository.UserRepository;
+
+import javax.xml.bind.DatatypeConverter;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by ohrinator on 5/22/17.
@@ -28,7 +36,7 @@ public class UserController {
     // Incijalizovati objekt koji uzimamo
     // repository.save(objekat)
     @RequestMapping(path="/create", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity addNewUser (@RequestParam String name, @RequestParam String email, @RequestParam String password) {
+    public @ResponseBody boolean addNewUser (@RequestParam String name, @RequestParam String email, @RequestParam String password) throws NoSuchAlgorithmException {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
@@ -36,17 +44,72 @@ public class UserController {
 
         n.setName(name);
         n.setEmail(email);
-        n.setPassword(password);
-
         n.setRemoved(false);
         n.setReported(false);
         n.setRole("User");
 
-        userRepository.save(n);
 
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        /* Generating password */
+        String authPassword = password + email + "probamosecurity";
+
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(authPassword.getBytes());
+        byte[] digest = md.digest();
+        String encodedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
+
+        n.setPassword(encodedPassword);
+
+
+        /* Generate authenticaton token */
+        String stringAuthToken = name + "eventsxt" + password + "eventstxt" + email;
+
+        MessageDigest md2 = MessageDigest.getInstance("MD5");
+        md.update(stringAuthToken.getBytes());
+        byte[] digest2 = md2.digest();
+        String authTokenCode = DatatypeConverter.printHexBinary(digest2).toUpperCase();
+
+        n.setAuthToken(authTokenCode);
+
+        if(userRepository.save(n) != null)
+            return true;
+        else
+            return false;
     }
 
+    /**************************************************************/
+
+    @RequestMapping(path="/login", method = RequestMethod.POST, produces = "text/plain")
+    public @ResponseBody String loginUser (@RequestParam String email, @RequestParam String password) throws NoSuchAlgorithmException {
+
+        /* Generating password */
+        String authPassword = password + email + "probamosecurity";
+
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(authPassword.getBytes());
+        byte[] digest = md.digest();
+        String encodedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
+
+        Page<User> users = userRepository.findByMailAndPass(email, encodedPassword, new PageRequest(0, 1));
+
+        if(users.getContent().size() > 0)
+        {
+            User loggedUser = users.getContent().get(0);
+            return loggedUser.getAuthToken();
+        }
+        else return "0";
+    }
+
+    /**************************************************************/
+
+    @RequestMapping(path="/checkToken", method = RequestMethod.POST)
+    public @ResponseBody User checkToken (@RequestParam String token)  {
+        User loggedUser = userRepository.findByToken(token);
+
+        if(loggedUser == null)
+            return null;
+        else
+            return loggedUser;
+    }
 
     /**************************************************************/
 
