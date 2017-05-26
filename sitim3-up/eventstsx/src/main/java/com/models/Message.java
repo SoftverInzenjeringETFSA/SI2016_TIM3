@@ -18,7 +18,6 @@ public class Message {
 	 private Timestamp time;
 	 private Integer userID;
 	 private Integer eventID;
-
 	
 	public Integer getId() {
 		return id;

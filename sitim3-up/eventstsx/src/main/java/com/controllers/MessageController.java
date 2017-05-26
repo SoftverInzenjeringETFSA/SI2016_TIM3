@@ -13,6 +13,8 @@ import com.repository.MessageRepository;
 import com.repository.UserRepository;
 
 @Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:8000")
 @RequestMapping(path="/message")
 public class MessageController {
 
@@ -43,12 +45,12 @@ public class MessageController {
 	        return messageRepository.findAll();
 	    }
 	 
-	 @RequestMapping(path="/delete/{id}", method = RequestMethod.POST)
+	 /*@RequestMapping(path="/delete/{id}", method = RequestMethod.POST)
 	    public @ResponseBody ResponseEntity deleteSingleMessage(@PathVariable Long id) {
 
 	        messageRepository.delete(id);
 
 	        return new ResponseEntity<>(null, HttpStatus.OK);
-	    }
+	    }*/
 }
 

@@ -20,4 +20,8 @@ public interface UserRepository extends JpaRepository<User, Long>, CrudRepositor
     /* Find by token */
     @Query("SELECT u FROM User u WHERE u.authToken = ?1")
     User findByToken(String token);
+
+    /* Vrati na osnovu imena */
+    @Query("SELECT u FROM User u WHERE u.name like ?1%")
+    Iterable<User> findByName(String name);
 }

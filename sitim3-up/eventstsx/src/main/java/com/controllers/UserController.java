@@ -132,11 +132,10 @@ public class UserController {
 
     // Obriši korisnika sa posebni ID-em
     @RequestMapping(path="/delete/{id}", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity deleteSingleUser(@PathVariable Long id) {
-
+    public @ResponseBody boolean deleteSingleUser(@PathVariable Long id) {
         userRepository.delete(id);
 
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return true;
     }
 
     /**************************************************************/
@@ -154,5 +153,12 @@ public class UserController {
 
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
+
+    // Vrati korisnike na osnovu imena
+    @GetMapping(path="/name/{name}")
+    public @ResponseBody Iterable<User> getAllUsers(@PathVariable String name) {
+        return userRepository.findByName(name);
+    }
+
 
 }
