@@ -26,6 +26,8 @@ public class Event {
 	private Timestamp created_at;
 	private boolean reported;
 	private boolean removed;
+
+	private String reportReason;
 	
 	
 	public Long getId() {
@@ -73,4 +75,7 @@ public class Event {
 
 	public Timestamp getCreatedAt() { return created_at; }
 	public void setCreatedAt(Timestamp createdAt) { this.created_at = createdAt; }
+
+	public String getReportReason() { return reportReason; }
+	public void setReportReason(String reportReason) { this.reportReason = reportReason; }
 }

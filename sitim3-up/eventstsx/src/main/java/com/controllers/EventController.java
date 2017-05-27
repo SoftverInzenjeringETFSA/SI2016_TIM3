@@ -1,6 +1,8 @@
 package com.controllers;
 
 import com.models.Event;
+import com.models.Invitation;
+import com.repository.InvitationRepository;
 import com.sun.xml.internal.bind.v2.model.core.ID;
 
 import java.sql.Timestamp;
@@ -23,6 +25,9 @@ public class EventController {
 
 	@Autowired
     EventRepository eventRepository;
+
+	@Autowired
+	InvitationRepository invitationRepository;
 	
 	 @RequestMapping(path="/create", method = RequestMethod.POST)
 	    public @ResponseBody Long addNewEvent (@RequestParam Long voteDeadline, @RequestParam String name, @RequestParam String description, @RequestParam String location, @RequestParam Long dateAndTime, @RequestParam Long user) {
@@ -42,8 +47,16 @@ public class EventController {
 		 	e.setUser(user);
 		 	e.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
-
 	        Event ev = eventRepository.save(e);
+
+		 	/* Automaticlly make invitation for htis user */
+		 	Invitation invitation = new Invitation();
+		 	invitation.setEventID(ev.getId());
+		 	invitation.setResponded(true);
+		 	invitation.setAccepted(true);
+		 	invitation.setInvited(user);
+
+		 	invitationRepository.save(invitation);
 
 	        return ev.getId();
 	    }
@@ -70,6 +83,24 @@ public class EventController {
 	    @RequestMapping(path="/user/{id}", method = RequestMethod.POST)
 		public @ResponseBody Iterable<Event> getMyEvents(@PathVariable Long id) {
 			return eventRepository.findByUser(id);
+		}
+
+		/* Report event */
+		@RequestMapping(path="/report", method = RequestMethod.POST)
+		public @ResponseBody
+		boolean reportEvent(@RequestParam Long eventID, @RequestParam Long userID, @RequestParam String reason)
+		{
+			if(invitationRepository.doesItExists(eventID, userID))
+			{
+				Event e = eventRepository.findOne(eventID);
+
+				e.setReported(true);
+				e.setReportReason(reason);
+
+				eventRepository.save(e);
+
+				return true;
+			}else return false;
 		}
 	   
 	   /*@RequestMapping(path="/update", method = RequestMethod.POST)

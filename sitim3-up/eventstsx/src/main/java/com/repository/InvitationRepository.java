@@ -15,7 +15,7 @@ public interface InvitationRepository extends JpaRepository<Invitation, Long>, C
 
     /* Get all invitations for event */
     @Query("SELECT i FROM Invitation i WHERE i.eventID = ?1")
-    Iterable<Invitation> findByEvent(Long id);
+    List<Invitation> findByEvent(Long id);
 
     /* Check if invitation exists */
     @Query("SELECT count(i) > 0 FROM Invitation i WHERE i.eventID = ?1 AND i.invited = ?2")
@@ -28,5 +28,9 @@ public interface InvitationRepository extends JpaRepository<Invitation, Long>, C
     /* Accepted events */
     @Query("SELECT i FROM Invitation i WHERE i.invited = ?1 AND i.responded = true AND i.accepted = true")
     List<Invitation> acceptedEvents(Long id);
+
+    /* Remove invitation */
+    @Query("SELECT count(i) > 0 FROM Invitation i WHERE i.id = ?1 AND i.invited = ?2")
+    boolean checkInvitation(Long invitation, Long user);
 
 }

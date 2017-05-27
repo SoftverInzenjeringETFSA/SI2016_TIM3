@@ -5,6 +5,7 @@ import com.models.Invitation;
 import com.models.User;
 import com.repository.EventRepository;
 import com.repository.InvitationRepository;
+import com.repository.UserRepository;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +32,9 @@ public class InvitationController {
 
     @Autowired
     EventRepository eventRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     /* Send invitation */
     @RequestMapping(path="/create", method = RequestMethod.POST)
@@ -125,17 +129,45 @@ public class InvitationController {
         }
 
         return array.toString();
-
     }
 
-    /* Get all users that are invted for one event */
-   /* @RequestMapping(path="/event/{id}", method = RequestMethod.GET)
+    /* Invited users */
+    @RequestMapping(path="/event", method = RequestMethod.POST)
     public @ResponseBody
-    String invitedUsers (@PathVariable Long id){
-        /* Find by event */
-     /*   Iterable<Invitation> invs = invitationRepository.findByEvent(id);
+    String eventUsers (@RequestParam Long eventID) {
+        List<Invitation> invs = invitationRepository.findByEvent(eventID);
 
+        JSONArray array = new JSONArray();
 
+        for(Invitation invitation : invs) {
+            JSONObject item = new JSONObject();
 
-    } */
+            User u = userRepository.findOne(invitation.getInvited());
+
+            try{
+                item.put("id", u.getId());
+                item.put("name", u.getName());
+                item.put("responded", invitation.isResponded());
+                item.put("accepted", invitation.isAccepted());
+                item.put("invitationID", invitation.getId());
+            }catch(Exception ex){
+                return invitation.getEventID().toString();
+            }
+
+            array.put(item);
+        }
+
+        return array.toString();
+    }
+
+    /* Cancle ivnitation */
+    @RequestMapping(path="/remove", method = RequestMethod.POST)
+    public @ResponseBody
+    boolean cancleInvitation (@RequestParam Long invitationID, @RequestParam Long userID) {
+        if (invitationRepository.checkInvitation(invitationID, userID)) {
+            invitationRepository.delete(invitationID);
+            return true;
+        }else return false;
+
+    }
 }

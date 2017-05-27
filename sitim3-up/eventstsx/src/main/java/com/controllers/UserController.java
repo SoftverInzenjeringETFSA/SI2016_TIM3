@@ -1,5 +1,6 @@
 package com.controllers;
 
+import com.models.Event;
 import com.models.User;
 //import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class UserController {
         String stringAuthToken = name + "eventsxt" + password + "eventstxt" + email;
 
         MessageDigest md2 = MessageDigest.getInstance("MD5");
-        md.update(stringAuthToken.getBytes());
+        md2.update(stringAuthToken.getBytes());
         byte[] digest2 = md2.digest();
         String authTokenCode = DatatypeConverter.printHexBinary(digest2).toUpperCase();
 
@@ -160,5 +161,19 @@ public class UserController {
         return userRepository.findByName(name);
     }
 
+    /* Report event */
+    @RequestMapping(path="/report", method = RequestMethod.POST)
+    public @ResponseBody
+    boolean reportEvent(@RequestParam Long userID, @RequestParam String reason)
+    {
+        User u = userRepository.findOne(userID);
+
+        u.setReported(true);
+        u.setReportReason(reason);
+
+        userRepository.save(u);
+
+        return true;
+    }
 
 }

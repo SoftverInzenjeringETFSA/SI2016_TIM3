@@ -12,17 +12,17 @@ public class Message {
 
 	 @Id
 	 @GeneratedValue(strategy= GenerationType.AUTO)
-	 private Integer id;
+	 private Long id;
 	 
 	 private String text;
 	 private Timestamp time;
-	 private Integer userID;
-	 private Integer eventID;
+	 private Long userID;
+	 private Long eventID;
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getText() {
@@ -31,6 +31,7 @@ public class Message {
 	public void setText(String text) {
 		this.text = text;
 	}
+
 	public Timestamp getTime() {
 		return time;
 	}
@@ -38,17 +39,17 @@ public class Message {
 		this.time = time;
 	}
 
-	public Integer getUserID() {
+	public Long getUserID() {
 		return userID;
 	}
-	public void setUserID(Integer user) {
+	public void setUserID(Long user) {
 		this.userID = user;
 	}
 
-	public Integer getEventID() {
+	public Long getEventID() {
 		return eventID;
 	}
-	public void setEventID(Integer event) {
+	public void setEventID(Long event) {
 		this.eventID = event;
 	}
 

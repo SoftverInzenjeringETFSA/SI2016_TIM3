@@ -1,9 +1,6 @@
 package com.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by ohrinator on 5/22/17.
@@ -12,23 +9,26 @@ import javax.persistence.Id;
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String name;
+
+    @Column(unique = true)
     private String email;
     private String password;
     private boolean reported;
     private boolean removed;
     private String role;
     private String authToken;
+    private String reportReason;
 
     public String getAuthToken() { return authToken; }
     public void setAuthToken(String authToken) { this.authToken = authToken; }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -74,4 +74,12 @@ public class User {
         this.role = role;
     }
 
+
+    public String getReportReason() {
+        return reportReason;
+    }
+
+    public void setReportReason(String reportReason) {
+        this.reportReason = reportReason;
+    }
 }
