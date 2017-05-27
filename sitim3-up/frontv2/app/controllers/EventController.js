@@ -5,6 +5,7 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     $scope.formData = {};
     $scope.createError = "";
 
+/*Neka ima ako sa validacijom ne uspije ovo je bila verzija prijav 23:50 27.5
     $scope.createEventProcess = function() {
 
     	$scope.formData.user 			= $rootScope.user.id;
@@ -15,16 +16,73 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     		if(response.data != 0 && response.data != false)
     		{
     			/* Ako nam je vratio ID eventa, redirektuj */
-    			$location.path('event/show/'+response.data);
+    			/*$location.path('event/show/'+response.data);
     		}
     		else
     		{
     			/* ako je vratio nulu ili false izbaci error */
-    			$scope.createError = "Došlo je do greške prilikom izrade eventa.";
+    			/*$scope.createError = "Došlo je do greške prilikom izrade eventa.";
     		}
 
     	});
     }
+
+*/
+  $scope.createEventProcess = function() {
+
+    $scope.formData.user 			= $rootScope.user.id;
+    $scope.formData.voteDeadline 	= parseInt(moment($scope.formData.voteDeadline).tz("Europe/Sarajevo").format('x'));
+    $scope.formData.dateAndTime 	= parseInt(moment($scope.formData.dateAndTime).tz("Europe/Sarajevo").format('x'));
+
+    Event.create($scope.formData).then(function(response){
+      if(response.data != 0 && response.data != false)
+      {
+        /* Ako nam je vratio ID eventa, redirektuj */
+        $location.path('event/show/'+response.data);
+      }
+      else
+      {
+        /* ako je vratio nulu ili false izbaci error */
+        $scope.createError = "Došlo je do greške prilikom izrade eventa.";
+      }
+
+    });
+}
+
+  /* Validacija create event forme */
+
+  $scope.eventFromValidation = function(){
+    $scope.createError = "";
+    var valid = true;
+    /*Polje za naziv eventa mora biti uneseno*/
+
+    if($scope.formData.name == 0) {
+        $scope.createError += "Naziv eventa mora biti unesen. ";
+        valid = false;
+    }
+
+    /* Lokacija eventa mora biti unesena */
+    if($scope.formData.location == 0) {
+        $scope.createError += "Lokacija eventa mora biti unesena. ";
+        valid = false;
+    }
+
+    /* Polje za datum i vrijeme eventa mora biti unseno */
+    if($scope.formData.dateAndTime == 0) {
+        $scope.createError += "Datum i vrijeme eventa mora biti uneseno. ";
+        valid = false;
+    }
+
+    /*Deadline za glasanje ne smije biti prije datuma eventa */
+    /*MIRZONI PROVJERI OVO!!!*/
+    $scope.formData.voteDeadline 	= parseInt(moment($scope.formData.voteDeadline).tz("Europe/Sarajevo").format('x'));
+    $scope.formData.dateAndTime 	= parseInt(moment($scope.formData.dateAndTime).tz("Europe/Sarajevo").format('x'));
+    if($scope.formData.voteDeadline <= $scope.formData.dateAndTime){
+      $scope.createError += "Deadline za glasanje ne smije biti prije datuma ogranizovanja eventa. ";
+      valid = false;
+    }
+
+  }
 
     /* Showing event informations on page */
     $scope.event = {};
@@ -47,13 +105,13 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     		Auth.showUsers(name.invName).then(function(response) {
     			if(response.data.length == 0)
     				$scope.errorPorukica = "Nažalost, korisnik ne postoji.";
-    			else 
+    			else
     				$scope.userList = response.data;
     		});
     	}else{
     		$scope.userList = {};
     		$scope.errorPorukica = "";
-    	} 
+    	}
     }
 
     /* Chek if user is connected to this event */
@@ -83,7 +141,7 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     	if($rootScope.user.id = $scope.event.id)
     	{
     		Event.delete($scope.event.id).then(function(response) {
-    			if(response.data) 
+    			if(response.data)
     				$location.path('/');
     			else
     				$scope.errorPorukica = "Niste uspjeli obrisati event.";
@@ -150,7 +208,7 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     	});
     }
 
-    /* Report useer */	
+    /* Report useer */
      $scope.reportThisUser = function(userID) {
     	var reason = prompt("Molimo Vas unesite razlog prijave:");
     	Auth.reportUser(userID, reason).then(function(response) {
@@ -160,7 +218,7 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     }
 
     /****************************************
-		CHat system event related functions 
+		CHat system event related functions
     *****************************************/
 
     /* Load event mesages */
