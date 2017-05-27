@@ -114,7 +114,7 @@ public class UserController {
 
     /**************************************************************/
 
-    // Vrai jednog korisnika
+    // Vrati jednog korisnika
     // Pošalji samo ID preko patha i to je to
     @RequestMapping(path="/{id}", method = RequestMethod.GET)
     public @ResponseBody User getSingleUser(@PathVariable Long id) {

@@ -11,6 +11,7 @@
                 <h3>Prijava</h3>
                     <hr>
                 <div class="alert alert-danger" ng-show="loginStatus.poruka">{{loginStatus.poruka}}</div>
+                <div class="alert alert-danger" ng-show="logValErrors">{{logValErrors}}</div>
                 <form ng-submit="processLoginForm()">
                     <div class="form-group">
                         <label for="email">E-mail:</label>
@@ -32,6 +33,7 @@
                     <hr>
                 <div class="alert alert-success" ng-if="status.uspjeh">{{status.poruka}}</div>
                 <div class="alert alert-danger" ng-if="status.neuspjeh">{{status.poruka}}</div>
+
                 <div class="alert alert-danger" ng-show="regValErrors">{{regValErrors}}</div>
                 <form ng-submit="processRegistrationForm()">
                     <div class="form-group">
