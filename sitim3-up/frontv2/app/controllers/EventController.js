@@ -56,6 +56,16 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     	} 
     }
 
+    /* Chek if user is connected to this event */
+    $scope.invited = false;
+    $scope.checkUser = function() {
+    	angular.forEach($scope.invitedUsers, function(value, key) {
+			if(value.id == $rootScope.user.id){ $scope.invited = true; }
+		});
+
+		if(!$scope.invited) $location.path('/');
+    }
+
     /* Invite user to an event */
     $scope.inviteUser = function(id) {
     	Invite.inviteUser(id, $scope.event.id).then(function(response){
@@ -127,6 +137,7 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     $scope.invitedUsersFunc = function(eventID) {
     	Event.invitedUsers(eventID).then(function(response) {
     		$scope.invitedUsers = response.data;
+    		$scope.checkUser();
     	});
     }
 

@@ -85,6 +85,21 @@ app.factory('Auth', function($rootScope, $location, $http) {
         });
     }
 
+    factory.userLogout = function() {
+
+              destroyCookie("authToken");
+              $rootScope.user = {
+                    authToken : 0,
+                    name : false,
+                    email : false,
+                    role : false,
+                    id : 0
+              };
+              $rootScope.loggedUser = false;
+
+      return true;
+    }
+
     factory.showUsers = function(name) {
       return $http({
               method  : 'GET',

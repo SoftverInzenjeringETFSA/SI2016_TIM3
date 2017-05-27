@@ -15,6 +15,7 @@
     background-position: center;
     min-height:520px;
     position:relative;
+    border-bottom:1px solid #d5d5d5;
 
 }
 
@@ -23,7 +24,7 @@
     z-index:10;
     top:0;bottom:0;right:0;left:0;
 
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.8);
 }
 
 .jumbotron .cover-content{
@@ -38,6 +39,56 @@
     font-family: 'Roboto Slab', serif;
 }
 
+.uber-footer{
+    height:80px;
+    background: #2e627a;
+}
+
+.footer{
+        background:#66ceff;
+        padding:30px 0;
+        margin-top:30px;
+    }
+.footer img{
+    margin:-15px;
+}
+    .footer .header{
+        display: block;
+        font-size:16px;
+        color:#fefefe;
+        font-family: 'Roboto Slab', serif;
+        border-bottom:1px solid #fefefe;
+        margin:15px 0;
+        padding-bottom:15px;
+    }
+
+    .footer .link-item{
+        display: block;
+        color:#fefefe;
+        line-height: 24px;
+        font-size:18px;
+    }
+
+    .footer .link-item:hover{
+        cursor:pointer;
+        opacity:0.6;
+        text-decoration: none;
+    }
+
+    .footer-bottom{
+        background:#161920;
+        padding:30px 0;
+    }
+
+
+
+.des-cover{
+    display: block;
+    font-size: 22px;
+    margin: 15px 0;
+    font-weight: 300;
+}
+
 .jumbotron .cover-content .see-more{
     display: inline-block;
     border:1px solid #fcfcfc;
@@ -45,7 +96,8 @@
     font-size: 16px;
     color:#fefefe;
     text-transform: uppercase;
-    font-weight: 700;
+
+   
 }
 
 .jumbotron .cover-content .see-more:hover{
@@ -53,6 +105,12 @@
     opacity: 0.5;
 }
 
+.reg{
+    margin-left: 15px;
+    color:#66ceff!important;
+    border-color: #66ceff!important;
+
+}
 /* Poruke */
 .thumbnail {
     padding:0px;
@@ -84,9 +142,14 @@
 }
 
 /* Features */
-.features{
-    background: #81c3e2;
-    color: #fefefe;
+.features .description{
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.features {
+    border-bottom: 0px solid #d5d5d5;
+    padding: 60px 0;
 }
 
 /* Snackbar */

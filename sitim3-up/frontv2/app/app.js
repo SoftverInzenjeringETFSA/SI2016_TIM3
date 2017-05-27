@@ -83,13 +83,7 @@ var adminOnly = function($q, $rootScope, $location, Auth) {
 
 /* Logout sa sistem a */
 var logout = function($q, $rootScope, $location, Auth){
-    Auth.rootAutentikacija().then(function(response){
-        
-    });
-
-    destroyCookie("authToken");
-    delete $rootScope.user;
-    delete $rootScope.loggedUser;
+    Auth.userLogout();
     $location.path("/");
     window.location.reload();
 }

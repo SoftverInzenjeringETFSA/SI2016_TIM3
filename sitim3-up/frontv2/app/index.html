@@ -53,7 +53,7 @@
                 <li><a href="#event/create">Kreiraj event</a></li>
                 <li><a href="#event/list">Moji eventi</a></li>
             </ul>
-            <ul ng-if="user.role == admin" class="nav navbar-nav">
+            <ul ng-if="user.role == admin && userLogged" class="nav navbar-nav">
               <li><a href="#event/list">Administration</a></li>
             </ul>
 
@@ -69,6 +69,29 @@
 <div ng-view>
 
 </div>
+
+
+<section class="footer">
+    <div class="container">
+        <div class="row row-landing">
+            <div class="col-md-3 col-sm-12">
+                <img src="img/footer-logo.png" />
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="header">
+                    EventCat App
+                </div>
+                <a href="/" class="link-item">Landing page</a>
+                <a href="/register" class="link-item">Registration & Login</a>
+                <a href="/event/create" class="link-item">Kreiraj event</a>
+                <a href="/event/list" class="link-item">Moji eventi</a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="uber-footer">
+
+</section>
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
