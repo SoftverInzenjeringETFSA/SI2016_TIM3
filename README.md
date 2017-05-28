@@ -87,3 +87,5 @@ Napomena: Ukoliko ima errora potrebno je ukucati komandu: sudo npm install .
 
 ### SRS https://docs.google.com/document/d/16P1VL2MDnE-8A_uua3OTc8qs2lBSbJ3U-trUoivNlNQ/edit?usp=sharing
 ### Dizajn sistema https://docs.google.com/document/d/1ItsIt_7n5fCupuKGVG-D1CV9A6_5vMbpu1z8VvvSPm0/edit?usp=sharing
+
+#### Ostatak ima u folderu Dokumentacija
