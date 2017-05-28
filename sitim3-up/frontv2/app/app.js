@@ -7,6 +7,8 @@ var app = angular.module('app', [
         $location.path("/");
         window.location.reload();
     }
+
+    $('#page-loading').fadeOut('slow');
 });
 
 app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
