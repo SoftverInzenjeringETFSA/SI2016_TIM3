@@ -63,6 +63,12 @@ Napomena: Ukoliko ima errora potrebno je ukucati komandu: sudo npm install .
 #### 4.3 Konacno pristupiti aplikaciji na http://localhost:8000/
 <br></br>
 
+### 5. Administrator privilegija
+
+#### 5.1 Pristupiti MySQL-u preko terminala
+#### 5.2 Izvrsiti query: UPDATE tim3.User SET role = 'admin' WHERE id = {id}; -gdje je id id korisnika kojem hoćemo da dodijelimo privilegije administratora
+#### 5.3 Sve korinsike u sistemu možemo vidjeti putem linka localhost:8080/user/all i na taj način pronaći naš id
+
 ## Implementirane funkcionalnosti: 
 - 3.2.1. Prijava na sistem
 - 3.2.2. Kreiranje korisničkog računa
