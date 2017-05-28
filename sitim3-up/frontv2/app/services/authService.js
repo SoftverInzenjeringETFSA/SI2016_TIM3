@@ -158,6 +158,51 @@ app.factory('Auth', function($rootScope, $location, $http) {
         });
     }
 
+    factory.resetPassword = function(email) {
+        return $http({
+              method  : 'POST',
+              url     : 'http://localhost:8080/user/resetpassword',
+              data    : $.param({"mail" : email}),
+              headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+        })
+        .success(function(data) {
+            return data;
+        })
+        .error(function(data) {
+            return false;
+        });
+    }
+
+    factory.changePassword = function(old, newPass) {
+        return $http({
+              method  : 'POST',
+              url     : 'http://localhost:8080/user/changepassword',
+              data    : $.param({"oldPass" : old, "newPass" : newPass, "id" : $rootScope.user.id}),
+              headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+        })
+        .success(function(data) {
+            return data;
+        })
+        .error(function(data) {
+            return false;
+        });
+    }
+
+    factory.deleteUser = function() {
+        return $http({
+              method  : 'POST',
+              url     : 'http://localhost:8080/user/delete',
+              data    : $.param({"id" : $rootScope.user.id}),
+              headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+        })
+        .success(function(data) {
+            return data;
+        })
+        .error(function(data) {
+            return false;
+        });
+    }
+
     return factory;
 
 });

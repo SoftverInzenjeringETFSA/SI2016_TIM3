@@ -1,7 +1,12 @@
 var app = angular.module('app', [
   'ngRoute'
 ]).run(function($rootScope, $location, Auth){
-    // Odradi provjeru autentikacije odmah
+
+    $rootScope.logout = function(){
+        Auth.userLogout();
+        $location.path("/");
+        window.location.reload();
+    }
 });
 
 app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
@@ -18,11 +23,6 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
         controller: 'AdminController',
         resolve: {
             factory: adminOnly
-        }
-    })
-    .when('/logout', {
-        resolve: {
-            factory: logout
         }
     })
     .when('/event/create', {
@@ -44,10 +44,27 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             factory: userOnly
         }
     })
+    .when('/settings' , {
+        templateUrl : "/views/me.html",
+        controller : 'AuthController',
+        resolve : {
+            factory : userOnly
+        }
+    })
     .otherwise(
-        { templateUrl : "/views/home.html" }
-    );
+        {   
+            templateUrl : "/views/home.html",
+            resolve : {
+                factory : everyone
+            } 
+    });
 }]);
+
+var everyone = function ($q, $rootScope, $location, Auth){
+    Auth.rootAutentikacija().then(function(response){
+        $('#page-loading').fadeOut('slow');
+    });
+}
 
 /* Ove dijelove stranice mogu vidjeti samo korisnic */
 var userOnly = function ($q, $rootScope, $location, Auth){
@@ -57,6 +74,7 @@ var userOnly = function ($q, $rootScope, $location, Auth){
             return true;
         else 
             $location.path("/register");
+        $('#page-loading').fadeOut('slow');
     });
 }
 
@@ -67,6 +85,7 @@ var userForbidden = function ($q, $rootScope, $location, Auth){
             $location.path("/");
         else 
             return true;
+        $('#page-loading').fadeOut('slow');
     });
 }
 
@@ -74,16 +93,10 @@ var userForbidden = function ($q, $rootScope, $location, Auth){
 var adminOnly = function($q, $rootScope, $location, Auth) {
     Auth.rootAutentikacija().then(function(response){
         if($rootScope.user.role != "admin")
-            //$location.path("/");
-            console.log("admin nisi");
+            $location.path("/");
         else 
             return true;
+        $('#page-loading').fadeOut('slow');
     });
 }
 
-/* Logout sa sistem a */
-var logout = function($q, $rootScope, $location, Auth){
-    Auth.userLogout();
-    $location.path("/");
-    window.location.reload();
-}

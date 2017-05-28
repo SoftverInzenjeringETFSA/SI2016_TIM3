@@ -1,8 +1,12 @@
 package com.controllers;
 
+import com.google.common.collect.Lists;
 import com.models.Event;
 import com.models.User;
 //import com.sun.xml.internal.bind.v2.model.core.ID;
+import it.ozimov.springboot.mail.model.Email;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
+import it.ozimov.springboot.mail.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,8 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import com.repository.UserRepository;
+import sun.misc.Request;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.xml.bind.DatatypeConverter;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -31,6 +39,24 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    public EmailService emailService;
+
+
+    private String encodePassword(String password, String email) {
+        String authPassword = password + email + "probamosecurity";
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(authPassword.getBytes());
+            byte[] digest = md.digest();
+            String encodedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
+
+            return encodedPassword;
+        }catch(NoSuchAlgorithmException exc){
+            return exc.getMessage();
+        }
+    }
 
     // Metoda za kreiranje novih korisnika u bazi
     // Potreno je odrediti requestparams koji se primaju i smještaju, bilo da su od POST ili GET requesta
@@ -132,8 +158,8 @@ public class UserController {
     /**************************************************************/
 
     // Obriši korisnika sa posebni ID-em
-    @RequestMapping(path="/delete/{id}", method = RequestMethod.POST)
-    public @ResponseBody boolean deleteSingleUser(@PathVariable Long id) {
+    @RequestMapping(path="/delete", method = RequestMethod.POST)
+    public @ResponseBody boolean deleteSingleUser(@RequestParam Long id) {
         userRepository.delete(id);
 
         return true;
@@ -172,6 +198,64 @@ public class UserController {
         u.setReportReason(reason);
 
         userRepository.save(u);
+
+        return true;
+    }
+
+    /* Promijeni password */
+    @RequestMapping(path="/changepassword", method= RequestMethod.POST)
+    public @ResponseBody
+    boolean changePassword(@RequestParam String oldPass, @RequestParam String newPass, @RequestParam Long id)
+    {
+        User u = userRepository.findOne(id);
+
+        String oldPassEncoded = encodePassword(oldPass, u.getEmail());
+
+        if(u.getPassword().equals(oldPassEncoded)) {
+            String newPassEncoded = encodePassword(newPass, u.getEmail());
+            u.setPassword(newPassEncoded);
+            userRepository.save(u);
+
+            return true;
+        }else return false;
+    }
+
+    /* Forgot password */
+    @RequestMapping(path="/resetpassword", method=RequestMethod.POST)
+    public @ResponseBody
+    boolean resetPassword(@RequestParam String mail) {
+
+        try {
+            User u = userRepository.findByMail(mail);
+            String authPassword = u.getPassword().substring(16);
+
+            String enkodiraj = authPassword + mail + "probamosecurity";
+
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(enkodiraj.getBytes());
+            byte[] digest = md.digest();
+            String encodedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
+
+            u.setPassword(encodedPassword);
+
+            userRepository.save(u);
+
+            final Email email = DefaultEmail.builder()
+                    .from(new InternetAddress("si2016tim3@gmail.com", "EventCatApp "))
+                    .to(Lists.newArrayList(new InternetAddress(u.getEmail(), "EventCatApp Korisnik")))
+                    .subject("Novi password")
+                    .body("Vaš novi password je: "+authPassword)
+                    .encoding("UTF-8").build();
+
+            emailService.send(email);
+        }catch (UnsupportedEncodingException ex) {
+            return false;
+        }catch(NullPointerException nex) {
+            return false;
+        }
+        catch(NoSuchAlgorithmException ex) {
+            return false;
+        }
 
         return true;
     }

@@ -24,4 +24,8 @@ public interface UserRepository extends JpaRepository<User, Long>, CrudRepositor
     /* Vrati na osnovu imena */
     @Query("SELECT u FROM User u WHERE u.name like ?1%")
     Iterable<User> findByName(String name);
+
+    /* Proanđi na osnovu maila */
+    @Query("SELECT u FROM User u WHERE u.email = ?1")
+    User findByMail(String mail);
 }

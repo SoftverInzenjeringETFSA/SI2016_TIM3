@@ -28,47 +28,51 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     }
 
 */
-  $scope.createEventProcess = function() {
+    $scope.createEventProcess = function() {
+        $scope.formData.user            = $rootScope.user.id;
+        $scope.formData.voteDeadline    = parseInt(moment($scope.formData.voteDeadline).tz("Europe/Sarajevo").format('x'));
+        $scope.formData.dateAndTime     = parseInt(moment($scope.formData.dateAndTime).tz("Europe/Sarajevo").format('x'));
 
-    $scope.formData.user 			= $rootScope.user.id;
-    $scope.formData.voteDeadline 	= parseInt(moment($scope.formData.voteDeadline).tz("Europe/Sarajevo").format('x'));
-    $scope.formData.dateAndTime 	= parseInt(moment($scope.formData.dateAndTime).tz("Europe/Sarajevo").format('x'));
+        if($scope.eventFromValidation()){
+            console.log($scope.formData);
 
-    Event.create($scope.formData).then(function(response){
-      if(response.data != 0 && response.data != false)
-      {
-        /* Ako nam je vratio ID eventa, redirektuj */
-        $location.path('event/show/'+response.data);
-      }
-      else
-      {
-        /* ako je vratio nulu ili false izbaci error */
-        $scope.createError = "Došlo je do greške prilikom izrade eventa.";
-      }
+            Event.create($scope.formData).then(function(response){
+              if(response.data != 0 && response.data != false)
+              {
+                /* Ako nam je vratio ID eventa, redirektuj */
+                $location.path('event/show/'+response.data);
+              }
+              else
+              {
+                /* ako je vratio nulu ili false izbaci error */
+                $scope.createError = "Došlo je do greške prilikom izrade eventa.";
+              }
 
-    });
-}
+            });
+        }
+    }
 
   /* Validacija create event forme */
 
   $scope.eventFromValidation = function(){
     $scope.createError = "";
     var valid = true;
+
     /*Polje za naziv eventa mora biti uneseno*/
 
-    if($scope.formData.name == 0) {
+    if(typeof $scope.formData.name === 'undefined') {
         $scope.createError += "Naziv eventa mora biti unesen. ";
         valid = false;
     }
 
     /* Lokacija eventa mora biti unesena */
-    if($scope.formData.location == 0) {
+    if(typeof $scope.formData.location === 'undefined') {
         $scope.createError += "Lokacija eventa mora biti unesena. ";
         valid = false;
     }
 
     /* Polje za datum i vrijeme eventa mora biti unseno */
-    if($scope.formData.dateAndTime == 0) {
+    if(typeof $scope.formData.dateAndTime === 'undefined') {
         $scope.createError += "Datum i vrijeme eventa mora biti uneseno. ";
         valid = false;
     }
@@ -82,6 +86,7 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
       valid = false;
     }
 
+    return valid;
   }
 
     /* Showing event informations on page */

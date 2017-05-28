@@ -3,37 +3,40 @@
         <div class="row">
             
             <div class="col-md-offset-2 col-md-8 col-sm-12">
+                <div class="alert alert-danger" ng-show="createError">
+                    {{createError}}
+                </div>
                 <h3>Kreiraj event</h3>
                     <hr>
                 <form ng-submit="createEventProcess()">
                     <div class="form-group">
                         <label for="naziv">Naziv eventa:</label>
                         <div>
-                            <input type="text" class="naziv form-control" name="naziv" ng-model="formData.name"/>
+                            <input type="text" class="naziv form-control" name="name" ng-model="formData.name" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="opis">Kratak opis eventa:</label>
                         <div>
-                            <textarea class="opis form-control" name="opis" ng-model="formData.description"></textarea>
+                            <textarea class="opis form-control" name="description" ng-model="formData.description" required></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="naziv">Lokacija:</label>
                         <div>
-                            <input type="text" class="naziv form-control" name="lokacija" ng-model="formData.location"/>
+                            <input type="text" class="naziv form-control" name="location" ng-model="formData.location" required/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="naziv">Vrijeme održavanja:</label>
                         <div>
-                             <input type="text" class="date-time form-control" ng-model="formData.dateAndTime"/>
+                             <input type="text" class="date-time form-control" name="dateAndTime" ng-model="formData.dateAndTime" required/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="naziv">Deadline za prijave:</label>
                         <div>
-                             <input type="text" class="date-time form-control" ng-model="formData.voteDeadline" />
+                             <input type="text" class="date-time form-control" name="voteDeadline" ng-model="formData.voteDeadline" required/>
                         </div>
                     </div>
                    

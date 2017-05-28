@@ -53,6 +53,11 @@
 			<artifactId>json</artifactId>
 			<version>20160810</version>
 		</dependency>
+		<dependency>
+			<groupId>it.ozimov</groupId>
+			<artifactId>spring-boot-mustache-email</artifactId>
+			<version>0.6.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>

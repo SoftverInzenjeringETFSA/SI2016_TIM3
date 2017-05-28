@@ -75,11 +75,6 @@ public class User {
     }
 
 
-    public String getReportReason() {
-        return reportReason;
-    }
-
-    public void setReportReason(String reportReason) {
-        this.reportReason = reportReason;
-    }
+    public String getReportReason() {  return reportReason; }
+    public void setReportReason(String reportReason) { this.reportReason = reportReason; }
 }

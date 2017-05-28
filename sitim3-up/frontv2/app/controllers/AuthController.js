@@ -101,26 +101,24 @@ app.controller('AuthController', function($rootScope, $scope, $http, $location, 
     $scope.logValErrors = "";
     $scope.processLoginForm = function() {
         if($scope.loginValidation()){
-        $scope.logValErrors = "";
-        Auth.login($scope.formLoginData.email, $scope.formLoginData.password).then(function(response){
+            $scope.logValErrors = "";
+            Auth.login($scope.formLoginData.email, $scope.formLoginData.password).then(function(response){
+        
+                if(response.data != 0)
+                {
+                    Auth.rootAutentikacija().then(function(resAut){
+                        console.log(resAut);
+                        if(resAut.data) $location.path("/");
+                    });
+                }
+                else
+                {
+                    $scope.loginStatus.logovan = false;
+                    $scope.loginStatus.poruka = "Nažalost, pristupni podaci nisu ispravni.";
+                }
 
-
-            if(response.data != 0)
-            {
-                Auth.rootAutentikacija().then(function(resAut){
-                    console.log(resAut);
-                    if(resAut.data) $location.path("/");
-                });
-            }
-            else
-            {
-                $scope.loginStatus.logovan = false;
-                $scope.loginStatus.poruka = "Nažalost, pristupni podaci nisu ispravni.";
-            }
-
-
-        });
-      }
+            });
+        }
     }
     $scope.loginValidation = function() {
       $scope.logValErrors = "";
@@ -150,6 +148,54 @@ app.controller('AuthController', function($rootScope, $scope, $http, $location, 
           $scope.logValErrors += "Uneseni password mora imati najmanje 8 znakova. ";
           valid = false;
       }
+
+      return valid;
     }
+
+    /*******************
+        Reset password
+    *******************/
+
+    $scope.resetPassword = function() {
+        var email = prompt("Unesite Vaš email");
+        Auth.resetPassword(email).then(function(response) {
+            console.log(response);
+            if(response.data) 
+                showSnackbar("Uspješno resetovan password! Provjerite Vaš e-mail.");
+            else
+                showSnackbar("Nažalost, došlo je do greške.");
+        });
+    }
+
+    /***************
+        Novi password 
+        ****************/
+
+    $scope.pass = {};
+    $scope.promijeniPassowrd = function() {
+        Auth.changePassword($scope.pass.old, $scope.pass.new).then(function(response) {
+            if(response.data)
+                showSnackbar("Uspješno ste promijenili password!");
+            else
+                showSnackbar("Nažalost, došlo je do greške.");
+        });
+    }
+
+    /**************
+        Obrisi racun 
+        ***************/
+    $scope.obrisiRacun = function() {
+        if(confirm("Sigurni ste da želite obrisati Vaš račun?"))
+        {
+            Auth.deleteUser().then(function(response) {
+                if(response.data)
+                    $location.path('/');
+                else
+                    showSnackbar("Nažalost, došlo je do greške.");
+            });
+        }
+    }
+
+    
 
 });

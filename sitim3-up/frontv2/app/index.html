@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title>EventCat App</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
@@ -53,12 +53,12 @@
                 <li><a href="#event/create">Kreiraj event</a></li>
                 <li><a href="#event/list">Moji eventi</a></li>
             </ul>
-            <ul ng-if="user.role == admin && userLogged" class="nav navbar-nav">
-              <li><a href="#event/list">Administration</a></li>
+            <ul ng-if="user.role == 'admin' && userLogged" class="nav navbar-nav">
+              <li><a href="#administration">Administration</a></li>
             </ul>
 
             <ul ng-show="userLogged" class="nav navbar-nav pull-right">
-                <li><a href="#logout">Odjavi se</a></li>
+                <li><a href="#" ng-click="logout()">Odjavi se</a></li>
             </ul>
 
         </div><!-- /.navbar-collapse -->
@@ -82,9 +82,9 @@
                     EventCat App
                 </div>
                 <a href="/" class="link-item">Landing page</a>
-                <a href="/register" class="link-item">Registration & Login</a>
-                <a href="/event/create" class="link-item">Kreiraj event</a>
-                <a href="/event/list" class="link-item">Moji eventi</a>
+                <a href="#/register" class="link-item">Registration & Login</a>
+                <a href="#/event/create" class="link-item">Kreiraj event</a>
+                <a href="#/event/list" class="link-item">Moji eventi</a>
             </div>
         </div>
     </div>
@@ -99,7 +99,7 @@
   <!-- Loading screen -->
   <script>
   document.addEventListener("DOMContentLoaded", function(event) {       
-    $('#page-loading').fadeOut('slow');
+    //$('#page-loading').fadeOut('slow');
   });
   </script>
 
