@@ -1,9 +1,12 @@
 # SI2016_TIM3
-
+<br>
 ## Dogovor za izlazak
 
-## Prije pokretanja aplikacije potrebno je:
 
+<br>
+
+## Prije pokretanja aplikacije potrebno je:
+<br>
 ### 1. Instalirati IntelliJ Idea Ultimate
 
 ### 2. Instalirati Apache Tomcat 9.0.0.M21
@@ -14,16 +17,16 @@
 
 ### 5. Instalirati node.js
 
-
+<br>
 
 ## Pokretanje projekta:
-
+<br>
 ### 1.Otvoriti terminal i ukucati: git clone https://github.com/SoftverInzenjeringETFSA/SI2016_TIM3.git da skinemo ovaj repozitorij
 
-
+<br>
 
 ### 2. Podesavanje MySQL baze
-
+<br>
 #### 2.1 Otvoriti terminal i pristupiti MySQL shell-u komandom: mysql -u root -p 
 
 NAPOMENA: Ako prethodna komanda ne radi nije instalirana MySQL baza podataka
@@ -33,9 +36,10 @@ NAPOMENA: Ako prethodna komanda ne radi nije instalirana MySQL baza podataka
 #### 2.3 Kreirati usera komandom: CREATE USER 'EtfSI2016' IDENTIFIED BY '2016SIEtf';
 #### 2.4 Dodijeli privilegije useru komandom: GRANT ALL PRIVILEGES ON tim3.* TO 'EtfSI2016'@'%' WITH GRANT OPTION;
 
- 
+<br>
+<br>
 ### 3. Pokrenuti IntellJ Idea
-
+<br>
 
 #### 3.1 Odabrati opciju Import Project 
 #### 3.2 Odabrati folder na sljedecoj lokaciji unutar git repozitorija ../SI2016_TIM3/sitim3-up/eventstsx      
@@ -46,7 +50,7 @@ NAPOMENA: Ako prethodna komanda ne radi nije instalirana MySQL baza podataka
 #### 3.7 Buildat i runat projekat
 #### 3.8 Otvoriti browser i ukucati adresu: http://localhost:8080/
 #### 3.9 Ako je ok, trebalo bi da na toj stranici piše sljedece:
-
+<br>
 Whitelabel Error Page
 
 This application has no explicit mapping for /error, so you are seeing this as a fallback.
@@ -54,11 +58,11 @@ This application has no explicit mapping for /error, so you are seeing this as a
 Sun May 28 16:54:31 CEST 2017
 There was an unexpected error (type=Not Found, status=404).
 No message available
-
-#### 3.10 Ostaviti IntellJ Idea da radi 
-
+<br>
+#### 3.10 Ostaviti pokrenut projekat da radi 
+<br>
 ### 4. Pokretanje aplikacije 
-
+<br>
 #### 4.1 Otvoriti terminal unutar foldera frontv2 na lokaciji ...SI2016_TIM3/sitim3-up/forntv2
 #### 4.2 Ukucati komandu: sudo npm start 
 
@@ -68,7 +72,7 @@ Napomena: Ukoliko ima errora potrebno je ukucati komandu: sudo npm install .
    
 #### 4.3 Konacno pristupiti aplikaciji na http://localhost:8000/
 
-
+<br>
 ## Linkovi dokumentacije:
 
 ### SRS https://docs.google.com/document/d/16P1VL2MDnE-8A_uua3OTc8qs2lBSbJ3U-trUoivNlNQ/edit?usp=sharing
