@@ -2,6 +2,8 @@
 
 ## Dogovor za izlazak
 
+## Linux/Windows 
+
 ## Prije pokretanja aplikacije potrebno je:
 
 ### 1. Instalirati IntelliJ Idea Ultimate
@@ -13,10 +15,12 @@
 ### 4. Instalirati npm
 
 ### 5. Instalirati node.js
+
+### 6. Wamp(Windows)
 <br></br>
 ## Pokretanje projekta:
 
-### 1.Otvoriti terminal i ukucati: git clone https://github.com/SoftverInzenjeringETFSA/SI2016_TIM3.git da skinemo ovaj repozitorij
+### 1.Otvoriti terminal i ukucati: git clone https://github.com/SoftverInzenjeringETFSA/SI2016_TIM3.git da skinemo ovaj repozitorij(Za Windows git bash)
 <br></br>
 ### 2. Podesavanje MySQL baze
 <br></br>
@@ -28,6 +32,8 @@ NAPOMENA: Ako prethodna komanda ne radi nije instalirana MySQL baza podataka
 #### 2.2 Kreirati bazu podataka komandom: CREATE DATABASE tim3; 
 #### 2.3 Kreirati usera komandom: CREATE USER 'EtfSI2016' IDENTIFIED BY '2016SIEtf';
 #### 2.4 Dodijeli privilegije useru komandom: GRANT ALL PRIVILEGES ON tim3.* TO 'EtfSI2016'@'%' WITH GRANT OPTION;
+
+#### 2.5 Otvoriti phpmyadmin na localhost-u napraviti bazu i korisnika za istim podacima kao u prethodnim koracima koristeci phpMyAdmin GUI(Windows)
 <br></br>
 ### 3. Pokrenuti IntellJ Idea
 <br></br>
@@ -55,6 +61,15 @@ No message available
 <br></br>
 #### 4.1 Otvoriti terminal unutar foldera frontv2 na lokaciji ...SI2016_TIM3/sitim3-up/forntv2
 #### 4.2 Ukucati komandu: sudo npm start 
+#### 4.3 Analogno uraditi u CMD-u na windows-u,tj. samo: npm start
+
+Napomena Windows: Ukoliko ne bude radilo probati sljedece komande:
+                  
+                  - npm install -g bower
+                  - npm install -g http-server
+                  - npm install
+
+
 
 Napomena: Ukoliko ima errora potrebno je ukucati komandu: sudo npm install . 
           Ako i dalje ne bude radilo potrebno je ukucati komandu: sudo apt-get install nodejs-legacy
@@ -68,7 +83,7 @@ Napomena: Ukoliko ima errora potrebno je ukucati komandu: sudo npm install .
 #### 5.1 Pristupiti MySQL-u preko terminala
 #### 5.2 Izvrsiti query: UPDATE tim3.User SET role = 'admin' WHERE id = {id}; -gdje je id id korisnika kojem hoćemo da dodijelimo privilegije administratora
 #### 5.3 Sve korinsike u sistemu možemo vidjeti putem linka localhost:8080/user/all i na taj način pronaći naš id
-
+#### 5.4 U phpMyAdminu uraditi ovo isto(Windows)
 ## Implementirane funkcionalnosti: 
 - 3.2.1. Prijava na sistem
 - 3.2.2. Kreiranje korisničkog računa
