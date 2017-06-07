@@ -59,15 +59,16 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     var valid = true;
 
     /*Polje za naziv eventa mora biti uneseno*/
-
-    if(typeof $scope.formData.name === 'undefined') {
-        $scope.createError += "Naziv eventa mora biti unesen. ";
+    var pattern = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,60}$/u;
+    if(typeof $scope.formData.name === 'undefined' || !pattern.test($scope.formData.name)) {
+        $scope.createError += "Naziv eventa nije unesen ili sadrži ilegalne karaktere.";
         valid = false;
     }
 
     /* Lokacija eventa mora biti unesena */
-    if(typeof $scope.formData.location === 'undefined') {
-        $scope.createError += "Lokacija eventa mora biti unesena. ";
+    var pattern = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,60}$/u;
+    if(typeof $scope.formData.location === 'undefined' || !pattern.test($scope.formData.location)) {
+        $scope.createError += "Lokacija eventa nije unesena ili sadrži ilegalne karaktere. ";
         valid = false;
     }
 
@@ -81,7 +82,7 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     /*MIRZONI PROVJERI OVO!!!*/
     $scope.formData.voteDeadline 	= parseInt(moment($scope.formData.voteDeadline).tz("Europe/Sarajevo").format('x'));
     $scope.formData.dateAndTime 	= parseInt(moment($scope.formData.dateAndTime).tz("Europe/Sarajevo").format('x'));
-    if($scope.formData.voteDeadline <= $scope.formData.dateAndTime){
+    if($scope.formData.voteDeadline >= $scope.formData.dateAndTime){
       $scope.createError += "Deadline za glasanje ne smije biti prije datuma ogranizovanja eventa. ";
       valid = false;
     }

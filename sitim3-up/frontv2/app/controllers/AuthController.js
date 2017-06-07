@@ -26,7 +26,7 @@ app.controller('AuthController', function($rootScope, $scope, $http, $location, 
                 {
                     $scope.status.uspjeh    = true;
                     $scope.status.neuspjeh  = false;
-                    $scope.status.poruka    = "Uspještno ste se registrovali!";
+                    $scope.status.poruka    = "Uspješno ste se registrovali!";
 
                     // Ako je uspješna registraicja, odradi login
                     Auth.login($scope.formRegistrationData.email, $scope.formRegistrationData.password).then(function(data){
@@ -60,8 +60,9 @@ app.controller('AuthController', function($rootScope, $scope, $http, $location, 
         $scope.regValErrors = "";
         var valid = true;
         // Ime mora biti uneseno
-        if($scope.formRegistrationData.name.length == 0) {
-            $scope.regValErrors += "Ime mora biti uneseno. ";
+        var pattern = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]+\s[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]+$/u;
+        if($scope.formRegistrationData.name.length == 0 || !pattern.test($scope.formRegistrationData.name)) {
+            $scope.regValErrors += "Ime i prezime nisu uneseni ili su neispravnog formata. ";
             valid = false;
         }
 

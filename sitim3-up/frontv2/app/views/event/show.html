@@ -17,7 +17,7 @@
                     <hr>
                     {{event.description}}
                     <hr>
-                        <i class="fa fa-clock-o"></i> {{event.voteDeadline}}
+                        <i class="fa fa-clock-o"></i> {{event.voteDeadline | date : format : timezone}}
                     <hr>
                         <i class="fa fa-map-marker"></i> {{event.location}}
                     <hr>
