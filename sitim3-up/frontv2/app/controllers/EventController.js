@@ -5,29 +5,7 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     $scope.formData = {};
     $scope.createError = "";
 
-/*Neka ima ako sa validacijom ne uspije ovo je bila verzija prijav 23:50 27.5
-    $scope.createEventProcess = function() {
 
-    	$scope.formData.user 			= $rootScope.user.id;
-    	$scope.formData.voteDeadline 	= parseInt(moment($scope.formData.voteDeadline).tz("Europe/Sarajevo").format('x'));
-    	$scope.formData.dateAndTime 	= parseInt(moment($scope.formData.dateAndTime).tz("Europe/Sarajevo").format('x'));
-
-    	Event.create($scope.formData).then(function(response){
-    		if(response.data != 0 && response.data != false)
-    		{
-    			/* Ako nam je vratio ID eventa, redirektuj */
-    			/*$location.path('event/show/'+response.data);
-    		}
-    		else
-    		{
-    			/* ako je vratio nulu ili false izbaci error */
-    			/*$scope.createError = "Došlo je do greške prilikom izrade eventa.";
-    		}
-
-    	});
-    }
-
-*/
     $scope.createEventProcess = function() {
         $scope.formData.user            = $rootScope.user.id;
         $scope.formData.voteDeadline    = parseInt(moment($scope.formData.voteDeadline).tz("Europe/Sarajevo").format('x'));
@@ -59,14 +37,14 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     var valid = true;
 
     /*Polje za naziv eventa mora biti uneseno*/
-    var pattern = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,60}$/u;
+    var pattern = /^[a-zA-Z0-9čćšžđČŠĐĆŽ\s]{2,80}$/u;
     if(typeof $scope.formData.name === 'undefined' || !pattern.test($scope.formData.name)) {
         $scope.createError += "Naziv eventa nije unesen ili sadrži ilegalne karaktere.";
         valid = false;
     }
 
     /* Lokacija eventa mora biti unesena */
-    var pattern = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,60}$/u;
+    var pattern = /^[a-zA-Z0-9čćšžđČŠĐĆŽ\s]{2,120}$/u;
     if(typeof $scope.formData.location === 'undefined' || !pattern.test($scope.formData.location)) {
         $scope.createError += "Lokacija eventa nije unesena ili sadrži ilegalne karaktere. ";
         valid = false;
