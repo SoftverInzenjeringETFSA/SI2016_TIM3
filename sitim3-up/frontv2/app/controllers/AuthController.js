@@ -21,8 +21,7 @@ app.controller('AuthController', function($rootScope, $scope, $http, $location, 
         if($scope.registrationValidation()) {
             $scope.regValErrors = "";
             Auth.register($scope.formRegistrationData).then(function(response) {
-
-                if(response)
+                if(response.data)
                 {
                     $scope.status.uspjeh    = true;
                     $scope.status.neuspjeh  = false;
@@ -49,7 +48,7 @@ app.controller('AuthController', function($rootScope, $scope, $http, $location, 
                 {
                     $scope.status.uspjeh    = false;
                     $scope.status.neuspjeh  = true;
-                    $scope.status.poruka    = "Greška prilikom registracije.";
+                    $scope.status.poruka    = "Korisnik već postoji.";
                 }
             });
         }

@@ -3,8 +3,10 @@ package com.repository;
 import com.models.Invitation;
 import com.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,5 +34,10 @@ public interface InvitationRepository extends JpaRepository<Invitation, Long>, C
     /* Remove invitation */
     @Query("SELECT count(i) > 0 FROM Invitation i WHERE i.id = ?1 AND i.invited = ?2")
     boolean checkInvitation(Long invitation, Long user);
+
+    /* Delete event invitations */
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Invitation i WHERE i.eventID = ?1") void deleteEventInvitations(Long id);
 
 }

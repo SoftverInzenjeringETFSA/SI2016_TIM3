@@ -74,6 +74,7 @@ public class EventController {
 	   @RequestMapping(path="/delete/{id}", method = RequestMethod.POST)
 	    public @ResponseBody boolean deleteSingleEvent(@PathVariable Long id) {
 
+		   	invitationRepository.deleteEventInvitations(id);
 	        eventRepository.delete(id);
 
 	        return true;

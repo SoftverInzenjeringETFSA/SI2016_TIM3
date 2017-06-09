@@ -186,19 +186,33 @@ app.controller('EventController', function($rootScope, $scope, $http, $location,
     /* Report event */
     $scope.reportThisEvent = function() {
     	var reason = prompt("Molimo Vas unesite razlog prijave:");
-    	Event.reportEvent($rootScope.user.id, $scope.event.id, reason).then(function(response) {
-    		if(response.data) showSnackbar("Uspješno prijavljen event.");
-    		else showSnackbar("Niste u mogućnosti prijaviti ovaj event.");
-    	});
+        if(reason == "") {
+          alert("Morate unijeti razlog.");  
+          $scope.reportThisEvent();
+        } else if(reason) {
+            Event.reportEvent($rootScope.user.id, $scope.event.id, reason).then(function(response) {
+                if(response.data) showSnackbar("Uspješno prijavljen event.");
+                else showSnackbar("Niste u mogućnosti prijaviti ovaj event.");
+            });
+        } else {
+            console.log("lol");
+        }
     }
 
     /* Report useer */
      $scope.reportThisUser = function(userID) {
     	var reason = prompt("Molimo Vas unesite razlog prijave:");
-    	Auth.reportUser(userID, reason).then(function(response) {
-    		if(response.data) showSnackbar("Uspješno prijavljen korisnik.");
-    		else showSnackbar("Niste u mogućnosti prijaviti korisnika.");
-    	});
+        if(reason == "") {
+            alert("Morate unijeti razolog.");
+            $scope.reportThisUser(userID);
+        } else if(reason) {
+            Auth.reportUser(userID, reason).then(function(response) {
+                if(response.data) showSnackbar("Uspješno prijavljen korisnik.");
+                else showSnackbar("Niste u mogućnosti prijaviti korisnika.");
+            });
+        } else {
+            console.log("lol");
+        }
     }
 
     /****************************************

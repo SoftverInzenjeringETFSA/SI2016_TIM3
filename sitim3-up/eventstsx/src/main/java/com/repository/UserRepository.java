@@ -28,4 +28,7 @@ public interface UserRepository extends JpaRepository<User, Long>, CrudRepositor
     /* Proanđi na osnovu maila */
     @Query("SELECT u FROM User u WHERE u.email = ?1")
     User findByMail(String mail);
+
+    @Query("SELECT count(u) > 0 FROM User u WHERE u.email = ?1")
+    boolean checkMail(String email);
 }
