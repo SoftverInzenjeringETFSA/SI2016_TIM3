@@ -32,6 +32,7 @@ NAPOMENA: Ako prethodna komanda ne radi nije instalirana MySQL baza podataka
 #### 2.2 Kreirati bazu podataka komandom: CREATE DATABASE tim3; 
 #### 2.3 Kreirati usera komandom: CREATE USER 'EtfSI2016' IDENTIFIED BY '2016SIEtf';
 #### 2.4 Dodijeli privilegije useru komandom: GRANT ALL PRIVILEGES ON tim3.* TO 'EtfSI2016'@'%' WITH GRANT OPTION;
+#### 2.5 Podesiti utf-8 encoding
 
 #### 2.5 Otvoriti phpmyadmin na localhost-u napraviti bazu i korisnika za istim podacima kao u prethodnim koracima koristeci phpMyAdmin GUI(Windows)
 <br></br>
