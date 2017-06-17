@@ -107,3 +107,7 @@ Napomena: Ukoliko ima errora potrebno je ukucati komandu: sudo npm install .
 
 
 #### Dokumentaciju pogledati u folderu dokumentacija
+
+Deployment odrađen:
+
+<h1>http://52.28.184.169/</h1>
