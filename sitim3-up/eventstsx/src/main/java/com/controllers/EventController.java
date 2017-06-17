@@ -19,7 +19,7 @@ import javax.xml.soap.Text;
 
 @Controller
 @RestController
-@CrossOrigin(origins = "http://localhost:8000")
+@CrossOrigin(origins = "http://52.28.184.169")
 @RequestMapping(path="/event")
 public class EventController {
 

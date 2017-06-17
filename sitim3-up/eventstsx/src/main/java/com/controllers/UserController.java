@@ -31,7 +31,7 @@ import java.security.NoSuchAlgorithmException;
  */
 @Controller
 @RestController
-@CrossOrigin(origins = "http://localhost:8000")
+@CrossOrigin(origins = "http://52.28.184.169")
 @RequestMapping(path="/user")
 public class UserController {
     // Kreirati repozitoriji za objekat

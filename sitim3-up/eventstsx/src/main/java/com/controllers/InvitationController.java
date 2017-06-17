@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Controller
 @RestController
-@CrossOrigin(origins = "http://localhost:8000")
+@CrossOrigin(origins = "http://52.28.184.169")
 @RequestMapping(path="/invitation")
 public class InvitationController {
 
