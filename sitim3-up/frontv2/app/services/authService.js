@@ -1,12 +1,12 @@
 app.factory('Auth', function($rootScope, $location, $http) {
 
-    var factory = {}; 
+    var factory = {};
 
     factory.register = function(data) {
-        return $http({
+        return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/user/create',
-              data    : $.param(data),  
+              url     : 'https://tim3-2.herokuapp.com/user/create',
+              data    : $.param(data),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data) {
@@ -19,10 +19,10 @@ app.factory('Auth', function($rootScope, $location, $http) {
 
     factory.login = function(email, password) {
 
-        return $http({
+        return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/user/login',
-              data    : $.param({ "email" : email, "password" : password }),  
+              url     : 'https://tim3-2.herokuapp.com/user/login',
+              data    : $.param({ "email" : email, "password" : password }),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data) {
@@ -56,14 +56,14 @@ app.factory('Auth', function($rootScope, $location, $http) {
 
         console.log("tu");
 
-        return $http({
+        return $https({
           method  : 'POST',
-          url     : 'http://localhost:8080/user/checkToken',
-          data    : $.param({ "token" : token }),  
+          url     : 'https://tim3-2.herokuapp.com/user/checkToken',
+          data    : $.param({ "token" : token }),
           headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data) {
-          
+
             if(data == 0)
             {
               return false;
@@ -101,10 +101,10 @@ app.factory('Auth', function($rootScope, $location, $http) {
     }
 
     factory.showUsers = function(name) {
-      return $http({
+      return $https({
               method  : 'GET',
-              url     : 'http://localhost:8080/user/name/'+name,
-              data    : $.param({"i" : "i"}),  
+              url     : 'https://tim3-2.herokuapp.com/user/name/'+name,
+              data    : $.param({"i" : "i"}),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data) {
@@ -116,9 +116,9 @@ app.factory('Auth', function($rootScope, $location, $http) {
     }
 
     factory.reportUser = function(user, reason) {
-    return $http({
+    return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/user/report',
+              url     : 'https://tim3-2.herokuapp.com/user/report',
               data    : $.param({"userID" : user, "reason" : reason}),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
@@ -131,9 +131,9 @@ app.factory('Auth', function($rootScope, $location, $http) {
   }
 
     factory.fetchAll = function() {
-      return $http({
+      return $https({
               method  : 'GET',
-              url     : 'http://localhost:8080/user/all',
+              url     : 'https://tim3-2.herokuapp.com/user/all',
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data) {
@@ -145,9 +145,9 @@ app.factory('Auth', function($rootScope, $location, $http) {
     }
 
     factory.delete = function(id) {
-        return $http({
+        return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/user/delete/'+id,
+              url     : 'https://tim3-2.herokuapp.com/user/delete/'+id,
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data) {
@@ -159,9 +159,9 @@ app.factory('Auth', function($rootScope, $location, $http) {
     }
 
     factory.resetPassword = function(email) {
-        return $http({
+        return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/user/resetpassword',
+              url     : 'https://tim3-2.herokuapp.com/user/resetpassword',
               data    : $.param({"mail" : email}),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
@@ -174,9 +174,9 @@ app.factory('Auth', function($rootScope, $location, $http) {
     }
 
     factory.changePassword = function(old, newPass) {
-        return $http({
+        return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/user/changepassword',
+              url     : 'https://tim3-2.herokuapp.com/user/changepassword',
               data    : $.param({"oldPass" : old, "newPass" : newPass, "id" : $rootScope.user.id}),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
@@ -189,9 +189,9 @@ app.factory('Auth', function($rootScope, $location, $http) {
     }
 
     factory.deleteUser = function() {
-        return $http({
+        return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/user/delete',
+              url     : 'https://tim3-2.herokuapp.com/user/delete',
               data    : $.param({"id" : $rootScope.user.id}),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })

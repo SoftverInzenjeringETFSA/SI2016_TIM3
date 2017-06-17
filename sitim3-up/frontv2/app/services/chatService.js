@@ -3,10 +3,10 @@ app.factory('Chat', function($rootScope, $location, $http) {
 	var factory = {};
 
 	factory.addMessage = function(message, event) {
-		return $http({
+		return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/message/create',
-              data    : $.param({"text" : message, "u" : $rootScope.user.id, "e" : event}),  
+              url     : 'https://tim3-2.herokuapp.com/message/create',
+              data    : $.param({"text" : message, "u" : $rootScope.user.id, "e" : event}),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data) {
@@ -18,10 +18,10 @@ app.factory('Chat', function($rootScope, $location, $http) {
 	}
 
 	factory.getEventMessages = function(event) {
-		return $http({
+		return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/message/event',
-              data    : $.param({"eventID" : event}),  
+              url     : 'https://tim3-2.herokuapp.com/message/event',
+              data    : $.param({"eventID" : event}),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data) {

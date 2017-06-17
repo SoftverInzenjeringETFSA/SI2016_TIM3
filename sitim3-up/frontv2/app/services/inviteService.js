@@ -3,10 +3,10 @@ app.factory('Invite', function($rootScope, $location, $http) {
 	var factory = {};
 
 	factory.inviteUser = function(user, event) {
-		return $http({
+		return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/invitation/create',
-              data    : $.param({"eventID" : event, "invited" : user}),  
+              url     : 'https://tim3-2.herokuapp.com/invitation/create',
+              data    : $.param({"eventID" : event, "invited" : user}),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data) {
@@ -20,10 +20,10 @@ app.factory('Invite', function($rootScope, $location, $http) {
 
 	/* Odgovori na ivnite */
 	factory.responde = function(response, invitation) {
-		return $http({
+		return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/invitation/responde',
-              data    : $.param({"invitationID" : invitation, "response" : response}),  
+              url     : 'https://tim3-2.herokuapp.com/invitation/responde',
+              data    : $.param({"invitationID" : invitation, "response" : response}),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data) {
@@ -36,10 +36,10 @@ app.factory('Invite', function($rootScope, $location, $http) {
 
 	/* Odustani od poziva */
 	factory.cancle = function(invitationID) {
-		return $http({
+		return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/invitation/remove',
-              data    : $.param({"invitationID" : invitationID, "userID" : $rootScope.user.id}),  
+              url     : 'https://tim3-2.herokuapp.com/invitation/remove',
+              data    : $.param({"invitationID" : invitationID, "userID" : $rootScope.user.id}),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data) {
@@ -52,10 +52,10 @@ app.factory('Invite', function($rootScope, $location, $http) {
 
 	/* Lista svih eventova na koje nismo odgovorili */
 	factory.getNotResponded = function(id) {
-		return $http({
+		return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/invitation/notResponded',
-              data    : $.param({"user" : id}),  
+              url     : 'https://tim3-2.herokuapp.com/invitation/notResponded',
+              data    : $.param({"user" : id}),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data) {
@@ -68,10 +68,10 @@ app.factory('Invite', function($rootScope, $location, $http) {
 
 	/* Lista svih eventova koje smo prihvatili ili kreirali */
 	factory.getMyEvents = function(id) {
-		return $http({
+		return $https({
               method  : 'POST',
-              url     : 'http://localhost:8080/invitation/myEvents',
-              data    : $.param({"user" : id}),  
+              url     : 'https://tim3-2.herokuapp.com/invitation/myEvents',
+              data    : $.param({"user" : id}),
               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .success(function(data) {
